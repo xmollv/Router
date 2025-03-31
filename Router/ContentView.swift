@@ -58,7 +58,9 @@ struct RouterView: View {
       initialRoute
         .environment(router)
         .navigationDestination(for: Route.self) {
-          $0.environment(router)
+          $0.environment(router).sheet(item: $router.sheet) {
+            RouterView(initialRoute: $0, parentRouter: router)
+          }
         }
         .sheet(item: $router.sheet) {
           RouterView(initialRoute: $0, parentRouter: router)
